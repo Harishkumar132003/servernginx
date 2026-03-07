@@ -6,15 +6,17 @@ services:
     container_name: dev-nginx
     ports:
       - "80:80"
+      - "443:443"
     volumes:
-      - ./sites:/etc/nginx/conf.d
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./sites/aikalavya-only.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     restart: unless-stopped
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
       - shared-app-network
-           
+
 networks:
   shared-app-network:
     external: true
