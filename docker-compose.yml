@@ -1,13 +1,13 @@
 version: "3.8"
 
 services:
-  nginx:
+  nginx_ssl:
     image: nginx:latest
-    container_name: edlumina-niginx-ssl-443
+    container_name: edlumina-nginx-ssl-443
     ports:
       - "443:443"
     volumes:
-      - ./sites/aikalavya-ssl-only.conf:/etc/nginx/conf.d/aikalavya-ssl-only.conf:ro
+      - ./sites:/etc/nginx/conf.d:ro
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
     restart: unless-stopped
